@@ -44,30 +44,18 @@ class blogs{
 	}
 	public function read_category($id_category) {
 		$sql = "SELECT * FROM $this->table WHERE id_category = :category_id";
+		
 		$stmt = $this->conn->prepare($sql);
 		$stmt->bindParam(":category_id", $id_category);
 		$stmt->execute();
-		$rows = $stmt->fetchAll(PDO::FETCH_ASSOC); 
-	
-		$blogs = [];
-	
-		foreach ($rows as $row) {
-			$blog = new stdClass(); 
-			
-			$blog->title = $row['title'];
-			$blog->content = $row['content'];
-			$blog->image = $row['image'];
-			$blog->id_category = $row['id_category'];
-			$blog->id_user = $row['id_user'];
-			$blog->created_at = $row['created_at'];
-			$blog->updated_at = $row['updated_at'];
-	
-			// Add $blog to $blogs array
-			$blogs[] = $blog;
-		}
-	
-		// Return the array of blog objects
-		return $blogs;
+		$row = $stmt->fetch(); 
+		$this->title = $row['title'];
+		$this->content = $row['content'];
+		$this->image = $row['image'];
+		$this->id_category = $row['id_category'];
+		$this->id_user = $row['id_user'];
+		$this->created_at = $row['created_at'];
+		$this->updated_at = $row['updated_at'];
 	}
 	
 	
