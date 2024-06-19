@@ -47,14 +47,11 @@ class blogs{
 		$stmt = $this->conn->prepare($sql);
 		$stmt->bindParam(":category_id", $id_category);
 		$stmt->execute();
-		$row = $stmt->fetch(); 
-		$this->title = $row['title'];
-		$this->content = $row['content'];
-		$this->image = $row['image'];
-		$this->id_category = $row['id_category'];
-		$this->id_user = $row['id_user'];
-		$this->created_at = $row['created_at'];
-		$this->updated_at = $row['updated_at'];
+		$result = array(); 
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $result[] = $row; 
+        }
+        return $result; 
 	}
 	
 	
