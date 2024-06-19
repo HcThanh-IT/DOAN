@@ -12,6 +12,20 @@
     if(isset($_GET['id_category'])){
         $id_category = $_GET['id_category']; 
         $stmt_blogs = $blogs->read_category($id_category);
+    
+        if ($stmt_blogs !== null && $stmt_blogs !== false) {
+            if ($stmt_blogs->rowCount() > 0) {
+                while ($blog = $stmt_blogs->fetch(PDO::FETCH_ASSOC)) {
+                    echo "Title: " . $blog['title'] . "<br>";
+                    echo "Content: " . $blog['content'] . "<br>";
+                    echo "<hr>";
+                }
+            } else {
+                echo "Không có bài đăng nào trong danh mục này.";
+            }
+        } else {
+            echo "Có lỗi xảy ra khi đọc dữ liệu từ cơ sở dữ liệu.";
+        }
     }
     else{
         $stmt_blogs_all = $blogs->readAll();
@@ -97,8 +111,8 @@
                     </p>
                 </div>
                 <div class="row g-4 justify-content-center">
-                    <?php if(isset($_GET['id_category']))
-                    while ($row_blogs = $stmt_blogs->fetch()) {
+                    <?php if(isset($_GET['id_category'])){
+                    // while ($row_blogs = $stmt_blogs->fetch()) {
 ?>
                     <div class="col-lg-4 col-md-6">
                         <div class="blog-item">
@@ -123,7 +137,10 @@
                             </div>
                         </div>
                     </div>
-                    <?php }else{ while ($row_blogs_all = $stmt_blogs_all->fetch()) {?>
+                    <?php 
+                }
+                else{ 
+                    while ($row_blogs_all = $stmt_blogs_all->fetch()) {?>
                         <div class="col-lg-4 col-md-6">
                         <div class="blog-item">
                             <div class="blog-img">

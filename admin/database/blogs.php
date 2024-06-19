@@ -44,7 +44,6 @@ class blogs{
 	}
 	public function read_category($id_category) {
 		$sql = "SELECT * FROM $this->table WHERE id_category = :category_id";
-		
 		$stmt = $this->conn->prepare($sql);
 		$stmt->bindParam(":category_id", $id_category);
 		$stmt->execute();
