@@ -8,26 +8,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
-            <a href="index.html" class="nav-item nav-link active">Home</a>
+            <a href="index.php" class="nav-item nav-link active">Home</a>
             <a href="about.html" class="nav-item nav-link">About</a>
             <a href="services.html" class="nav-item nav-link">Services</a>
             <a href="packages.html" class="nav-item nav-link">Packages</a>
-            <a href="blog.html" class="nav-item nav-link">Blog</a>
+            <a href="blogs.php" class="nav-item nav-link">Blog</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categories</a>
                 <div class="dropdown-menu m-0">
                     <?php 
                         while ($row_categories = $stmt_categories->fetch()) {
                     ?>
-                    <a href="destination.html" class="dropdown-item">Destination</a>
+                    <a href="blogs.php?id_category=<?php echo $row_categories['id']?>" class="dropdown-item"><?php echo $row_categories['title']?></a>
                     <?php } ?>
-                    <!-- <a href="destination.html" class="dropdown-item">Destination</a>
-                    <a href="tour.html" class="dropdown-item">Explore Tour</a>
-                    <a href="booking.html" class="dropdown-item">Travel Booking</a>
-                    <a href="gallery.html" class="dropdown-item">Our Gallery</a>
-                    <a href="guides.html" class="dropdown-item">Travel Guides</a>
-                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                    <a href="404.html" class="dropdown-item">404 Page</a> -->
                 </div>
             </div>
             <a href="contact.html" class="nav-item nav-link">Contact</a>
