@@ -1,6 +1,7 @@
 <?php 
     include "admin/database/database.php";
     include "admin/database/blogcategories.php";
+    include "about.php";
     $database = new database;
     $db = $database->connect();
 
