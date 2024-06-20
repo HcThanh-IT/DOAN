@@ -27,32 +27,13 @@ class blogs{
 	}
 
 	//read
-	public function read(){
-		$sql="SELECT * FROM $this->table
-				WHERE id= :get_id";
+	public function read($id_blog){
+		$sql = "SELECT * FROM $this->table WHERE id = :get_id";
 		$stmt = $this->conn->prepare($sql);
-		$stmt->bindParam(":get_id",$this->id);
+		$stmt->bindParam(":get_id", $id_blog);
 		$stmt->execute();
-		$row = $stmt->fetch();
-		$this->title = $row['title'];
-		$this->content = $row['content'];
-		$this->image = $row['image'];
-		$this->id_category = $row['id_category'];
-		$this->id_user = $row['id_user'];
-		$this->created_at = $row['created_at'];
-		$this->updated_at = $row['updated_at'];
+		return $stmt;
 	}
-	// public function read_category($id_category) {
-	// 	$sql = "SELECT * FROM $this->table WHERE id_category = :category_id";
-	// 	$stmt = $this->conn->prepare($sql);
-	// 	$stmt->bindParam(":category_id", $id_category);
-	// 	$stmt->execute();
-	// 	$result = array(); 
-    //     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-    //         $result[] = $row; 
-    //     }
-    //     return $result; 
-	// }
 	public function read_category($id_category) {
 		$sql = "SELECT * FROM $this->table WHERE id_category = :category_id";
 		$stmt = $this->conn->prepare($sql);

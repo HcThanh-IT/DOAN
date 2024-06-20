@@ -9,8 +9,18 @@
     $stmt_categories = $blogcategories->readAll();
 
     $blogs= new blogs($db);
-    $id_category=$_GET['id_category'];
-    $stmt_blogs=$blogs->read_category($id_category);
+    if(isset($_GET['id_category'])){
+        $id_category=$_GET['id_category'];
+        $stmt_blog=$blogs->read_category($id_category);
+    }
+    else if(isset($_GET['id_blog'])){
+        $id_blog=$_GET['id_blog'];
+        $stmt_blog=$blogs->read($id_blog);
+    }
+    else{
+        $stmt_blog=$blogs->readAll();
+    }
+    
 
 ?>
 <!DOCTYPE html>
@@ -82,39 +92,41 @@
             <div class="container py-5">
                 <div class="mx-auto text-center mb-5" style="max-width: 900px;">
                     <h5 class="section-title px-3">Our Blog</h5>
-                    <?php 
+                    <?php if(isset($_GET['id_category'])){
                     $stmt_categories = $blogcategories->readAll();
                         while ($row_categories = $stmt_categories->fetch()) {
                     ?>
                         <h1 class="mb-4">
                             <?php if($_GET['id_category']==$row_categories['id'])echo $row_categories['title']?>
                         </h1>
-                    <?php } ?>
-                    <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti deserunt tenetur sapiente atque. Magni non explicabo beatae sit, vel reiciendis consectetur numquam id similique sunt error obcaecati ducimus officia maiores.
-                    </p>
+                        <p class="mb-0">
+                            <?php if($_GET['id_category']==$row_categories['id'])echo $row_categories['status']?>
+                        </p>
+                    <?php } }?>
+                    
                 </div>
                 <div class="row g-4 justify-content-center">
-                    <?php  while ($row_blogs = $stmt_blogs->fetch()){?>
+                    <?php  while ($row_blog = $stmt_blog->fetch()){?>
                     <div class="col-lg-4 col-md-6">
                         <div class="blog-item">
                             <div class="blog-img">
                                 <div class="blog-img-inner">
-                                    <img class="img-fluid w-100 rounded-top" src="img/blog-1.jpg" alt="Image">
+                                    <img class="img-fluid w-100 rounded-top" src="./images/blogs/<?php echo $row_blog['image'];?>" alt="Image">
                                     <div class="blog-icon">
                                         <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
                                     </div>
                                 </div>
                                 <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>28 Jan 2050</small>
+                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i><?php echo $row_blog['created_at'];?></small>
                                     <a href="#" class="btn-hover flex-fill text-center text-white border-end py-2"><i class="fa fa-thumbs-up text-primary me-2"></i>1.7K</a>
                                     <a href="#" class="btn-hover flex-fill text-center text-white py-2"><i class="fa fa-comments text-primary me-2"></i>1K</a>
                                 </div>
                             </div>
                             <div class="blog-content border border-top-0 rounded-bottom p-4">
                                 <p class="mb-3">Posted By: Royal Hamblin </p>
-                                <a href="#" class="h4"><?php  echo $row_blogs['title'];?></a>
-                                <p class="my-3"><?php echo $row_blogs['content']?></p>
-                                <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Read More</a>
+                                <a href="#" class="h4"><?php echo $row_blog['title'];?></a>
+                                <p class="my-3"><?php echo $row_blog['content']?></p>
+                                <a href="blogs.php?id_blog=<?php echo $row_blog['id'];?>" class="btn btn-primary rounded-pill py-2 px-4">Read More</a>
                             </div>
                         </div>
                     </div>
