@@ -119,6 +119,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         .filed:nth-child(2) {
             margin-top: 1.25rem;
         }
+        .filed:nth-child(3) {
+            margin-top: 1.25rem;
+        }
         .filed span {
             position: absolute;
             width: 3.12rem;
@@ -184,7 +187,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 </head>
 <body>
     <div class="container">
-        <div class="text">Login Form</div>
+        <div class="text">Register Form</div>
         <form action="" method="POST">
             <div class="filed">
                 <span class="fas fa-user"></span>
@@ -192,13 +195,18 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 <label for="username">Username</label>
             </div>
             <div class="filed">
+                <span class="fas fa-envelope"></span>
+                <input type="email" name="email" id="email" required>
+                <label for="email">Email</label>
+            </div>
+            <div class="filed">
                 <span class="fas fa-lock"></span>
                 <input type="password" name="password" id="password" required>
                 <label for="password">Password</label>
             </div>
             <div class="forgot">Forgot your password? <a href="#">Reset here</a></div>
-            <button type="submit">Login</button>
-            <div class="signup">Don't Have an Account? <a href="register.php">Create Now!</a></div>
+            <button type="submit">Register</button>
+            <div class="signup">Back To <a href="login.php">Login</a></div>
         </form>
     </div>
 </body>
