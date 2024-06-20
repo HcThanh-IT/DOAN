@@ -94,7 +94,7 @@
                     </p>
                 </div>
                 <div class="row g-4 justify-content-center">
-                    <?php foreach ($stmt_blogs as $row_blogs) {?>
+                    <?php  while ($row_blogs = $stmt_blogs->fetch()){?>
                     <div class="col-lg-4 col-md-6">
                         <div class="blog-item">
                             <div class="blog-img">

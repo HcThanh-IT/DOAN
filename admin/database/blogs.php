@@ -42,16 +42,23 @@ class blogs{
 		$this->created_at = $row['created_at'];
 		$this->updated_at = $row['updated_at'];
 	}
+	// public function read_category($id_category) {
+	// 	$sql = "SELECT * FROM $this->table WHERE id_category = :category_id";
+	// 	$stmt = $this->conn->prepare($sql);
+	// 	$stmt->bindParam(":category_id", $id_category);
+	// 	$stmt->execute();
+	// 	$result = array(); 
+    //     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    //         $result[] = $row; 
+    //     }
+    //     return $result; 
+	// }
 	public function read_category($id_category) {
 		$sql = "SELECT * FROM $this->table WHERE id_category = :category_id";
 		$stmt = $this->conn->prepare($sql);
 		$stmt->bindParam(":category_id", $id_category);
 		$stmt->execute();
-		$result = array(); 
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $result[] = $row; 
-        }
-        return $result; 
+		return $stmt;
 	}
 	
 	
