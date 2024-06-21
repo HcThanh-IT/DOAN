@@ -52,7 +52,7 @@
                     ?>
                         <?php while ($row_blog = $stmt_blog->fetch()){?>
                         <div class="carousel-item <?php if ($active) { echo 'active'; $active = false; } ?>">
-                            <img src="img/carousel-1.jpg" class="img-fluid" alt="Image">
+                            <img src="./images/blogs/<?php echo $row_blog['image'];?>" class="img-fluid" alt="Image">
                             <div class="carousel-caption">
                                 <div class="p-3" style="max-width: 900px;">
                                     <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;"><?php echo $row_blog['title_category']?></h4>
