@@ -1,7 +1,7 @@
 <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
-                    <h1 class="m-0"><i class="fa fa-map-marker-alt me-3"></i>Travela</h1>
+                    <h1 class="m-0"><i class="fa fa-user me-3"></i>21661054</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -9,13 +9,13 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="index.php?page=home" class="nav-item nav-link active">Home</a>
-                        <a href="index.php?page=about" class="nav-item nav-link">About</a>
-                        <a href="index.php?page=home" class="nav-item nav-link">Services</a>
-                        <a href="index.php?page=home" class="nav-item nav-link">Packages</a>
-                        <a href="index.php?page=blogs" class="nav-item nav-link">Blog</a>
+                        <a href="index.php?page=home" class="nav-item nav-link <?php if($page =='home') echo 'active';?>">Home</a>
+                        <a href="index.php?page=about" class="nav-item nav-link <?php if($page =='about') echo 'active';?>">About</a>
+                        <a href="index.php?page=home" class="nav-item nav-link <?php if($page =='home') echo 'active';?>">Services</a>
+                        <a href="index.php?page=home" class="nav-item nav-link <?php if($page =='home') echo 'active';?>">Packages</a>
+                        <a href="index.php?page=blogs" class="nav-item nav-link <?php if($page =='blogs'&&!isset($_GET['id_category'])) echo 'active';?>">Blog</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Categories</a>
+                            <a href="#" class="nav-link dropdown-toggle <?php if(isset($_GET['id_category'])) echo 'active';?>" data-bs-toggle="dropdown">Categories</a>
                             <div class="dropdown-menu m-0">
                                 <?php 
                                     while ($row_categories = $stmt_categories->fetch()) {
@@ -24,9 +24,9 @@
                                 <?php } ?>
                             </div>
                         </div>
-                        <a href="index.php?page=contact" class="nav-item nav-link">Contact</a>
+                        <a href="index.php?page=contact" class="nav-item nav-link <?php if($page =='contact') echo 'active';?>">Contact</a>
                     </div>
-                    <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
+                    <a href="./admin" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">ADMIN</a>
                 </div>
             </nav>
             <?php if($page=='home'){?>
@@ -34,53 +34,38 @@
             <div class="carousel-header">
                 <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
                     <ol class="carousel-indicators">
-                        <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active"></li>
-                        <li data-bs-target="#carouselId" data-bs-slide-to="1"></li>
-                        <li data-bs-target="#carouselId" data-bs-slide-to="2"></li>
+                        <?php 
+                            $number = 5; // Số bài muốn hiển thị
+                            for ($i = 0; $i < $number; $i++) {
+                        ?>
+                            <li data-bs-target="#carouselId" class="<?php if($i == 0) echo 'active'; ?>" data-bs-slide-to="<?php echo $i; ?>"></li>
+                        <?php 
+                            }
+                        ?>
                     </ol>
+
                     <div class="carousel-inner" role="listbox">
-                        <div class="carousel-item active">
-                            <img src="img/carousel-2.jpg" class="img-fluid" alt="Image">
-                            <div class="carousel-caption">
-                                <div class="p-3" style="max-width: 900px;">
-                                    <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">Explore The World</h4>
-                                    <h1 class="display-2 text-capitalize text-white mb-4">Let's The World Together!</h1>
-                                    <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                    </p>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
+                    <?php 
+                        $blogs= new blogs($db);
+                        $stmt_blog=$blogs->desc(5);
+                        $active = true;
+                    ?>
+                        <?php while ($row_blog = $stmt_blog->fetch()){?>
+                        <div class="carousel-item <?php if ($active) { echo 'active'; $active = false; } ?>">
                             <img src="img/carousel-1.jpg" class="img-fluid" alt="Image">
                             <div class="carousel-caption">
                                 <div class="p-3" style="max-width: 900px;">
-                                    <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">Explore The World</h4>
-                                    <h1 class="display-2 text-capitalize text-white mb-4">Find Your Perfect Tour At Travel</h1>
-                                    <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                    </p>
+                                    <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;"><?php echo $row_blog['title_category']?></h4>
+                                    <h1 class="display-2 text-capitalize text-white mb-4"><?php echo $row_blog['title']?></h1>
+                                    <p class="mb-5 fs-5"><?php echo $row_blog['content']?></p>
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
+                                        <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="index.php?page=blogs&id_blog=<?php echo $row_blog['id']?>">Discover Now</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="carousel-item">
-                            <img src="img/carousel-3.jpg" class="img-fluid" alt="Image">
-                            <div class="carousel-caption">
-                                <div class="p-3" style="max-width: 900px;">
-                                    <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;">Explore The World</h4>
-                                    <h1 class="display-2 text-capitalize text-white mb-4">You Like To Go?</h1>
-                                    <p class="mb-5 fs-5">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                                    </p>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="#">Discover Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php }?>
+
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon btn bg-primary" aria-hidden="false"></span>
@@ -95,13 +80,3 @@
             <!-- Carousel End -->
              <?php }?>
         </div>
-        <?php if($page=='home'){?>
-        <div class="container-fluid search-bar position-relative" style="top: -50%; transform: translateY(-50%);">
-            <div class="container">
-                <div class="position-relative rounded-pill w-100 mx-auto p-5" style="background: rgba(19, 53, 123, 0.8);">
-                    <input class="form-control border-0 rounded-pill w-100 py-3 ps-4 pe-5" type="text" placeholder="Eg: Thailand">
-                    <button type="button" class="btn btn-primary rounded-pill py-2 px-4 position-absolute me-2" style="top: 50%; right: 46px; transform: translateY(-50%);">Search</button>
-                </div>
-            </div>
-        </div>
-        <?php }?>

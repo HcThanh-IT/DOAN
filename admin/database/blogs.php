@@ -41,6 +41,18 @@ class blogs{
 		$stmt->execute();
 		return $stmt;
 	}
+	public function desc($number) {
+		$sql = "SELECT blogs.*, blogcategories.title AS title_category
+				FROM " . $this->table . " 
+				JOIN blogcategories ON blogs.id_category = blogcategories.id 
+				ORDER BY blogs.updated_at DESC 
+				LIMIT :number";
+		$stmt = $this->conn->prepare($sql);
+		$stmt->bindParam(':number', $number, PDO::PARAM_INT);
+		$stmt->execute();
+		return $stmt;
+	}
+	
 	
 	
 	public function create(){
