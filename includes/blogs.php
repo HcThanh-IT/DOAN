@@ -57,12 +57,11 @@
                             <div class="row g-5 align-items-center">
                                 <div class="col-lg-5">
                                     <div class="h-100" style="border: 50px solid; border-color: transparent #13357B transparent #13357B;">
-                                        <img src="img/about-img.jpg" class="img-fluid w-100 h-100" alt="">
+                                        <img src="./images/blogs/<?php echo $row_blog['image'];?>" class="img-fluid w-100 h-100" alt="">
                                     </div>
                                 </div>
                                 <div class="col-lg-7" style="background: linear-gradient(rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)), url(img/about-img-1.png);">
-                                    <h5 class="section-about-title pe-3">About Us</h5>
-                                    <h1 class="mb-4">Welcome to <span class="text-primary"><?php echo $row_blog['title']?></span></h1>
+                                    <h1 class="mb-4"><span class="text-primary"><?php echo $row_blog['title']?></span></h1>
                                     <p class="mb-4"><?php echo $row_blog['content']?></p>
                                 
                                 </div>
