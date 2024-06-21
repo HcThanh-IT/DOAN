@@ -20,7 +20,7 @@
                                 <?php 
                                     while ($row_categories = $stmt_categories->fetch()) {
                                 ?>
-                                <a href="index.php?id_category=<?php echo $row_categories['id']?>" class="dropdown-item"><?php echo $row_categories['title']?></a>
+                                <a href="index.php?page=blogs&id_category=<?php echo $row_categories['id']?>" class="dropdown-item"><?php echo $row_categories['title']?></a>
                                 <?php } ?>
                             </div>
                         </div>
