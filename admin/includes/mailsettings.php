@@ -50,7 +50,8 @@ if(!empty($message)){
                         <form role="form" method="Post" action="index.php?page=mailsettings">
                             <div class="form-group">
                                 <label>Email</label>
-                                <input type="text" name="email" class="form-control" value="<?php echo $mailsettings->email ?>">
+                                <input type="text" name="email" class="form-control" value="<?php echo 
+                                $mailsettings->email ?>">
                             </div>
                             <div class="form-group">
                                 <label>Mail Server</label>

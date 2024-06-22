@@ -46,23 +46,21 @@
 
                     <div class="carousel-inner" role="listbox">
                     <?php 
-                        $blogs= new blogs($db);
-                        $stmt_blog=$blogs->desc(5);
+                       $sliders = new sliders($db);
+                        $stmt_sliders = $sliders->readAll();
                         $active = true;
                     ?>
-                        <?php while ($row_blog = $stmt_blog->fetch()){?>
+                        <?php while ($row_sliders = $stmt_sliders->fetch()){?>
                         <div class="carousel-item <?php if ($active) { echo 'active'; $active = false; } ?>">
-                            <img src="./images/blogs/<?php echo $row_blog['image'];?>" class="img-fluid" alt="Image">
-                            <div class="carousel-caption">
+                            <img src="./images/sliders/<?php echo $row_sliders['image'];?>" class="img-fluid" alt="Image">o
+                           <div class="carousel-caption">
                                 <div class="p-3" style="max-width: 900px;">
-                                    <h4 class="text-white text-uppercase fw-bold mb-4" style="letter-spacing: 3px;"><?php echo $row_blog['title_category']?></h4>
-                                    <h1 class="display-2 text-capitalize text-white mb-4"><?php echo $row_blog['title']?></h1>
-                                    <p class="mb-5 fs-5"><?php echo $row_blog['content']?></p>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="index.php?page=blogs&id_blog=<?php echo $row_blog['id']?>">Discover Now</a>
-                                    </div>
+                                    <h1 class="display-2 text-capitalize text-white mb-4"><?php echo $row_sliders['title']?></h1>
+                                    <!-- <div class="d-flex align-items-center justify-content-center">
+                                        <a class="btn-hover-bg btn btn-primary rounded-pill text-white py-3 px-5" href="index.php?page=blogs&id_blog=<?php echo $row_sliderso['id']?>">Discover Now</a>
+                                    </div> -->
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                         <?php }?>
 

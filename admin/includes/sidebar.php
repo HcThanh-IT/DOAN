@@ -4,11 +4,12 @@
     <div class="logo-header" data-background-color="dark">
       <a href="index.html" class="logo">
         <img
-          src="assets/img/kaiadmin/logo_light.svg"
+          src="assets/img/eyes.jpg"
           alt="navbar brand"
           class="navbar-brand"
-          height="20"
+          height="60"
         />
+        <span style="color: white;"> Minh Thảo</span>
       </a>
       <div class="nav-toggle">
         <button class="btn btn-toggle toggle-sidebar">
@@ -27,63 +28,28 @@
   <div class="sidebar-wrapper scrollbar scrollbar-inner">
     <div class="sidebar-content">
       <ul class="nav nav-secondary">
-        <li class="nav-item active">
-          <a
-            data-bs-toggle="collapse"
-            href="#dashboard"
-            class="collapsed"
-            aria-expanded="false"
-          >
-            <i class="fas fa-home"></i>
-            <p>Dashboard</p>
-            <span class="caret"></span>
-          </a>
-          <div class="collapse" id="dashboard">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="index.php">
+        <li class="nav-item <?php echo setActive('dashboard') ?>  ">
+                <a href="index.php ">
+                  <i class="fas fa-home"></i>
                   <span class="sub-item">Dashboard</span>
                 </a>
-              </li>
-            </ul>
-          </div>
         </li>
-        <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#sidebarLayouts">
-            <i class="fas fa-th-list"></i>
-            <p>Sidebar Layouts</p>
-            <span class="caret"></span>
-          </a>
-          <div class="collapse" id="sidebarLayouts">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="index.php?page=blogcategories">
-                  <span class="sub-item">Blog Categories</span>
-                </a>
-              </li>
-              <li>
-                <a href="index.php?page=blogs">
-                  <span class="sub-item">Blogs</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#forms">
+        
+        <li class="nav-item <?php echo setActive('blogs') ?>">
+          <a href="index.php?page=blogs">
             <i class="fas fa-pen-square"></i>
-            <p>Forms</p>
-            <span class="caret"></span>
+            <span class="sub-item">Blogs</span>
           </a>
-          <div class="collapse" id="forms">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="forms/forms.html">
-                  <span class="sub-item">Basic Form</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+        </li>
+        <?php
+          /*Admin - Mod menu*/
+            if($_SESSION['user_role']>=1){
+          ?>
+        <li class="nav-item  <?php echo setActive('blogcategories') ?>">
+          <a href="index.php?page=blogcategories">
+            <i class="fas fa-th-list"></i>
+            <span class="sub-item">Blog Categories</span>
+          </a>
         </li>
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#tables">
@@ -106,34 +72,37 @@
             </ul>
           </div>
         </li>
-        <li class="nav-item">
-          <a data-bs-toggle="collapse" href="#charts">
-            <i class="far fa-chart-bar"></i>
-            <p>Charts</p>
-            <span class="caret"></span>
-          </a>
-          <div class="collapse" id="charts">
-            <ul class="nav nav-collapse">
-              <li>
-                <a href="charts/charts.html">
-                  <span class="sub-item">Chart Js</span>
-                </a>
-              </li>
-              <li>
-                <a href="charts/sparkline.html">
-                  <span class="sub-item">Sparkline</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+        <li class="nav-item  <?php echo setActive('subscribers') ?>">
+            <a href="index.php?page=subscribers">
+              <i class="far fa-chart-bar"></i>
+              <span class="sub-item">Subscribers</span>
+            </a>
+          </li>
+        <li class="nav-item  <?php echo setActive('sliders') ?>">
+            <a href="index.php?page=sliders">
+            <i class="fas fa-th-list"></i>
+              <span class="sub-item">Sliders</span>
+            </a>
+          </li>
+        <li class="nav-item  <?php echo setActive('users') ?>">
+            <a href="index.php?page=users">
+               <i class="fas fa-user"></i>
+              <span class="sub-item">User</span>
+            </a>
+          </li>
         </li>
         <li class="nav-item">
           <a href="widgets.html">
-            <i class="fas fa-desktop"></i>
+           
             <p>Widgets</p>
             <span class="badge badge-success">4</span>
           </a>
         </li>
+        <?php
+          }
+          /*Admin menu*/
+           if($_SESSION['user_role']==2){
+          ?>
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#submenu">
             <i class="fas fa-bars"></i>
@@ -142,47 +111,38 @@
           </a>
           <div class="collapse" id="submenu">
             <ul class="nav nav-collapse">
-              <li>
-                <a href="index.php?page=sliders">
-                  <span class="sub-item">Sliders</span>
-                </a>
-              </li>
-              <li>
-                <a href="index.php?page=subscribers">
-                  <span class="sub-item">Subscribers</span>
-                </a>
-              </li>
-              <li>
+
+               <li class="nav-item  <?php echo setActive('mailsettings') ?>">
                 <a href="index.php?page=mailsettings">
                   <span class="sub-item">Mail Setting</span>
                 </a>
               </li>
-              <li>
+               <li class="nav-item  <?php echo setActive('settings') ?>">
                 <a href="index.php?page=settings">
                   <span class="sub-item">Setting</span>
                 </a>
               </li>
-              <li>
+               <li class="nav-item  <?php echo setActive('socials') ?>">
                 <a href="index.php?page=socials">
                   <span class="sub-item">Socials</span>
                 </a>
               </li>
-              <li>
+               <li class="nav-item  <?php echo setActive('contact') ?>">
                 <a href="index.php?page=contact">
                   <span class="sub-item">Contact</span>
                 </a>
               </li>
-              <li>
+               <li class="nav-item  <?php echo setActive('terms') ?>">
                 <a href="index.php?page=terms">
                   <span class="sub-item">Terms</span>
                 </a>
               </li>
-              <li>
-                <a href="index.php?page=users">
-                  <span class="sub-item">Users</span>
+               <li class="nav-item  <?php echo setActive('about') ?>">
+                <a href="index.php?page=about">
+                  <span class="sub-item">About</span>
                 </a>
               </li>
-              <li>
+               <li class="nav-item  <?php echo setActive('links') ?>">
                 <a href="index.php?page=links">
                   <span class="sub-item">Links</span>
                 </a>
@@ -190,6 +150,9 @@
             </ul>
           </div>
         </li>
+          <?php  
+            }
+          ?>
       </ul>
     </div>
   </div>

@@ -77,9 +77,9 @@
                             <div class="blog-item">
                                 <div class="blog-img">
                                     <div class="blog-img-inner">
-                                        <img class="img-fluid w-100 rounded-top" src="./images/blogs/<?php echo $row_blog['image'];?>" alt="Image">
+                                        <img class="img-fluid w-100 rounded-top" style="object-fit: cover; height: 300px; " src="./images/blogs/<?php echo $row_blog['image'];?>" alt="Image">
                                         <div class="blog-icon">
-                                            <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
+                                            <a href="index.php?page=blogs&id_blog=<?php echo $row_blog['id']?>" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
                                         </div>
                                     </div>
                                     <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
@@ -90,8 +90,32 @@
                                 </div>
                                 <div class="blog-content border border-top-0 rounded-bottom p-4">
                                     <p class="mb-3">Posted By: Royal Hamblin </p>
-                                    <a href="#" class="h4"><?php echo $row_blog['title']?></a>
-                                    <p class="my-3"><?php echo $row_blog['content']?></p>
+                                    <a href="#" class="h4" style="
+                                        --lines: 2;
+                                        --line-height: 1.2em;
+                                        display: -webkit-box;
+                                        -webkit-box-orient: vertical;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        -webkit-line-clamp: var(--lines); 
+                                        line-height: var(--line-height);
+                                        height: calc(var(--lines) * var(--line-height)); 
+                                    "><?php echo $row_blog['title']?></a>
+                                    <p class="my-3" style="
+                                        --lines:4;
+                                        --line-height: 1.5em;
+                                        text-align: justify; 
+                                        text-align-last: left;
+                                        display: -webkit-box;
+                                        -webkit-box-orient: vertical;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                        -webkit-line-clamp: var(--lines); 
+                                        line-height: var(--line-height);
+                                        max-height: calc(var(--lines) * var(--line-height)); 
+                                    ">
+                                        <?php echo $row_blog['content']?>
+                                    </p>
                                     <a href="index.php?page=blogs&id_blog=<?php echo $row_blog['id']?>" class="btn btn-primary rounded-pill py-2 px-4">Read More</a>
                                 </div>
                             </div>

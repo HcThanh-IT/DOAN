@@ -1,4 +1,42 @@
 <?php
+/*Short Text*/
+function shortText($str, $len = 100){
+	$txt = substr($str,0,$len);
+	return substr($txt,0, strrpos($txt," "))."...";
+}
+
+/*Return Next Page*/
+function nextPage($current_page, $num_pages){
+	$num_pages = $num_pages - 1;
+	if($current_page < $num_pages){
+		$next_page = $current_page + 1;
+	}else{
+		$next_page = false;
+	}
+	return $next_page;
+}
+
+/*Return Previous Page*/
+function previousPage($current_page, $num_pages){
+	$current_page = $current_page + 1;
+	if($current_page > 0){
+		$previous_page = $current_page - 1;
+	}else{
+		$previous_page = false;
+	}
+	return $previous_page;
+}
+
+/*Set active menu*/
+function setActive($str){
+	$page = explode("_",isset($_GET['page'])?$_GET['page']:'dashboard');
+	if($page[0]==$str){
+		echo "active";
+	}else{
+		echo "";
+	}
+}
+
 /*User's role*/
 function userRole($role){
 	if($role==0){
@@ -14,20 +52,12 @@ function userRole($role){
 
 /*Upload Image*/  
 function uploadImage($img, $path = null){
-    $image_path = isset($path) ? $path : '../images/';
-    
-    // Create directory if it doesn't exist
-    if (!file_exists($image_path)) {
-        mkdir($image_path, 0777, true);
-    }
-    
-    $image_type = explode(".", $img['name']);
-    $image_name = "media_" . uniqid() . "." . $image_type[1];
-    $image = move_uploaded_file($img['tmp_name'], $image_path . $image_name);
-    
-    return $image_name;
+	$image_path = isset($path)?$path:'../images/';
+	$image_type = explode(".",$img['name']);
+	$image_name = "media_".uniqid().".".$image_type[1];
+	$image = move_uploaded_file($img['tmp_name'], $image_path.$image_name);
+	return $image_name;
 }
-
 
 /*Delete Image*/
 function deleteImage($img, $path = null){
@@ -41,7 +71,7 @@ function deleteImage($img, $path = null){
 
 /*Update Image*/
 function updateImage($img, $old_img = null, $path = null){
-	$image_path = isset($path)?$path:'../image/';
+	$image_path = isset($path)?$path:'../images/';
 	if($old_img){
 		unlink($image_path.$old_img);
 	}

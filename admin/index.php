@@ -30,12 +30,14 @@ $settings->id = 1;
 $settings->read();
 
 $page = isset($_GET['page'])?$_GET['page']:'dashboard';
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Kaiadmin - Bootstrap 5 Admin Dashboard</title>
+    <title><?php echo strtoupper($page); ?></title>
     <meta
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
@@ -482,6 +484,27 @@ $page = isset($_GET['page'])?$_GET['page']:'dashboard';
         tabsize: 2,
         height: 100
       });
+
+
+      function sendMail(){
+        var title = document.getElementById("title").value;
+        var content = document.getElementById("content").value;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                //console.log("this.responseText");
+                //alert(this.responseText);
+                if(this.responseText == "success"){
+                    document.getElementById("msg").innerHTML = "<div class='alert alert-success'>Mail has been send to all Users successfully!</div>";
+                }else{
+                    document.getElementById("msg").innerHTML = "<div class='alert alert-warning'>No user available to send email</div>";
+                }                
+            }
+        }
+        xhttp.open("POST","mail/sendmail.php",true);
+        xhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xhttp.send("title="+title+"&content="+content);
+      }
     </script>
   </body>
 </html>

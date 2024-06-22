@@ -27,13 +27,13 @@ class blogs{
 	}
 
 	//read
-	public function read($id_blog){
-		$sql = "SELECT * FROM $this->table WHERE id = :get_id";
-		$stmt = $this->conn->prepare($sql);
-		$stmt->bindParam(":get_id", $id_blog);
-		$stmt->execute();
-		return $stmt;
-	}
+	 public function read($id_blog){
+        $sql = "SELECT * FROM $this->table WHERE id = :get_id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":get_id", $id_blog);
+        $stmt->execute();
+        return $stmt;
+    }
 	public function read_category($id_category) {
 		$sql = "SELECT * FROM $this->table WHERE id_category = :category_id";
 		$stmt = $this->conn->prepare($sql);

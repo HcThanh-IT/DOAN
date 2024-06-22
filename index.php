@@ -2,11 +2,15 @@
     include "admin/database/database.php";
     include "admin/database/blogcategories.php";
     include "admin/database/blogs.php";
+    include "admin/database/sliders.php";
     $database = new database;
     $db = $database->connect();
 
     $blogcategories = new blogcategories($db);
     $stmt_categories = $blogcategories->readAll();
+    
+    $sliders = new sliders($db);
+    $stmt_sliders = $sliders->readAll();
 
     $page = isset($_GET['page'])?$_GET['page']:'home';
 

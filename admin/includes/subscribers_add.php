@@ -5,7 +5,9 @@
         </h1>
     </div>
 </div> 
+<!-- /. ROW  -->
 <div id="msg">
+    <!-- Show message -->
 </div> 
 <div class="row">
     <div class="col-lg-12">        
@@ -23,7 +25,7 @@
                                 <label>Content</label>
                                 <textarea id="content" name="content" class="form-control"></textarea>
                             </div>
-                            <button type="button" onclick="sendMail()" class="btn btn-primary btn-sm">Submit</button>
+                            <button type="submit" onclick="sendMail()" class="btn btn-primary btn-sm">Submit</button>
                         </form>
                     </div>
                 </div>
